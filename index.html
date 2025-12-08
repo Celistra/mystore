@@ -270,7 +270,7 @@
             gap: 2rem;
             padding: 2rem;
             border-radius: 1.5rem;
-            background: linear-gradient(135deg, #4c1d95, #111827);
+            background: linear-gradient(135deg, #111827, #4c1d95);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
             backdrop-filter: blur(15px);
             border: 2px solid rgba(192, 132, 252, 0.3);
@@ -326,6 +326,9 @@
             transition: all 0.3s ease;
             align-self: flex-start;
             margin-top: 0.5rem;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.4;
         }
 
         .profile-card-link:hover {
@@ -444,7 +447,7 @@
             <img src="Cel.jpg" alt="Celistria" class="profile-card-avatar">
             <div class="profile-card-info">
                 <h2 class="profile-card-name">Celistria</h2>
-                <a href="https://app.unifans.io/c/celistria" target="_blank" class="profile-card-link">点击跳转至Unifans</a>
+                <a href="https://app.unifans.io/c/celistria" target="_blank" class="profile-card-link" data-lang-zh="点击跳转至我的Unifans" data-lang-zh-tw="點擊跳轉至我的Unifans" data-lang-en="Click to visit my Unifans" data-lang-ja="私のUnifansを訪問するにはクリック">点击跳转至我的Unifans</a>
             </div>
         </div>
     </div>
@@ -711,6 +714,13 @@
             
             // 更新返回按钮文本
             updateBackButtonText(language);
+            
+            // 更新profile-card-link文本
+            const profileCardLink = document.querySelector('.profile-card-link');
+            if (profileCardLink) {
+                const linkText = profileCardLink.getAttribute(`data-lang-${language}`) || '点击跳转至我的Unifans';
+                profileCardLink.textContent = linkText;
+            }
             
             // 初始化手风琴功能
             initAccordions();

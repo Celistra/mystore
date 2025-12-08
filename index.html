@@ -95,37 +95,6 @@
             border-color: rgba(192, 132, 252, 0.5);
         }
 
-        .profile-avatar-placeholder {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 3px dashed rgba(192, 132, 252, 0.5);
-            transition: all 0.5s ease;
-            background-color: rgba(192, 132, 252, 0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-avatar-placeholder:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 0 35px rgba(192, 132, 252, 0.4);
-            border-color: rgba(192, 132, 252, 0.8);
-            border-style: solid;
-        }
-
-        .profile-avatar-placeholder input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 10;
-        }
-
         .profile-avatar {
             width: 150px;
             height: 150px;
@@ -226,12 +195,7 @@
 
     <div class="profile-container" id="profileContainer">
         <div class="profile-header">
-            <div class="profile-avatar-placeholder" id="profileAvatar">
-                <input type="file" id="avatarUpload" accept="image/*">
-                <div class="text-center flex items-center justify-center h-full">
-                    <span class="text-sm text-gray-400">点击此处<br>上传头像</span>
-                </div>
-            </div>
+            <img src="Cel" alt="Profile Avatar" class="profile-avatar" id="profileAvatarImg">
             <h1 class="profile-name" id="profileName">用户名</h1>
         </div>
         <div class="profile-content" id="profileContent">
@@ -243,7 +207,7 @@
     <script>
         // 个人信息配置
         const profileConfig = {
-            avatar: "Cel", // GitHub上的头像图片名称
+            avatar: "Cel", // 使用GitHub根目录的'Cel'图片文件
             name: {
                 zh: "Celistria",
                 en: "Celistria"
@@ -253,7 +217,7 @@
                     <p>你好，我是Celistria，在跳转至我的Unifans之前，请务必阅读接下来的注意事项。</p>
                     <p></p>
                     <p>1、赞助文件打开方式（必看！！！）。</p>
-                    <p>赞助并且下载对应文件后，你将得到一个包含“.penc”文件的压缩包，这个文件无法通过常规方式打开，必须需要使用下方这个40MB的特殊'Viewer'图片浏览程序才能查看到该压缩包中每个“.penc”文件所对应的图片。</p>
+                    <p>赞助并且下载对应文件后，你将得到一个包含".penc"文件的压缩包，这个文件无法通过常规方式打开，必须需要使用下方这个40MB的特殊'Viewer'图片浏览程序才能查看到该压缩包中每个".penc"文件所对应的图片。</p>
                     <p>'Viewer'图片浏览程序(V0.1版本)下载地址：</p>
                     <p>-Mega网盘：</p>
                     <p>-浏览器直接下载：</p>
@@ -354,36 +318,8 @@
             // 自动检测并转换文本中的URL为链接
             convertUrlsToLinks();
             
-            // 初始化头像显示和上传功能
-            initAvatarDisplay();
-        }
-        
-        // 初始化头像显示和上传功能
-        function initAvatarDisplay() {
-            const avatarUpload = document.getElementById('avatarUpload');
-            const profileAvatar = document.getElementById('profileAvatar');
-            
-            // 尝试加载GitHub上的头像图片
-            const githubAvatar = new Image();
-            githubAvatar.onload = function() {
-                // 图片加载成功，显示头像
-                profileAvatar.innerHTML = '';
-                githubAvatar.className = 'profile-avatar';
-                githubAvatar.id = 'profileAvatarImg';
-                profileAvatar.appendChild(githubAvatar);
-            };
-            
-            githubAvatar.onerror = function() {
-                // 图片加载失败，保持占位符不变
-                console.log('无法加载，显示占位符');
-            };
-            
-            // 设置图片源为GitHub仓库中的图片，图片位于仓库根目录
-            githubAvatar.src = profileConfig.avatar;
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
+            // 设置头像图片
+            document.getElementById('profileAvatarImg').src = profileConfig.avatar;
         }
 
         // 将文本中的URL转换为可点击链接

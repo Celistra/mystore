@@ -264,6 +264,75 @@
             max-height: 1000px;
         }
 
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            background: linear-gradient(135deg, #4c1d95, #111827);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            width: 100%;
+            max-width: 800px;
+            margin-top: 2rem;
+            transition: all 0.5s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -5px rgba(192, 132, 252, 0.3);
+            border-color: rgba(192, 132, 252, 0.5);
+        }
+
+        .profile-card-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(192, 132, 252, 0.5);
+            transition: all 0.5s ease;
+            box-shadow: 0 0 25px rgba(192, 132, 252, 0.4);
+        }
+
+        .profile-card-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(192, 132, 252, 0.6);
+            border-color: rgba(192, 132, 252, 0.8);
+        }
+
+        .profile-card-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .profile-card-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .profile-card-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #c084fc, #a855f7);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            margin-top: 0.5rem;
+        }
+
+        .profile-card-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(192, 132, 252, 0.5);
+        }
+
 
 
         .back-button {
@@ -366,13 +435,17 @@
 
     <div class="profile-container" id="profileContainer">
         <button class="back-button" id="backButton" data-lang-zh="返回" data-lang-zh-tw="返回" data-lang-en="Back" data-lang-ja="戻る">返回</button>
-        <div class="profile-header">
-            <img src="Cel.jpg" alt="Profile Avatar" class="profile-avatar" id="profileAvatarImg">
-            <h1 class="profile-name" id="profileName">用户名</h1>
-        </div>
+
         <div class="profile-content" id="profileContent">
             <p>这里是个人简介内容。你可以在JavaScript代码中修改这些文字。</p>
             <p>你也可以添加网址，例如：<a href="https://www.example.com" target="_blank">https://www.example.com</a>，它会自动变成可点击的链接。</p>
+        </div>
+        <div class="profile-card">
+            <img src="Cel.jpg" alt="Celistria" class="profile-card-avatar">
+            <div class="profile-card-info">
+                <h2 class="profile-card-name">Celistria</h2>
+                <a href="https://app.unifans.io/c/celistria" target="_blank" class="profile-card-link">点击跳转至Unifans</a>
+            </div>
         </div>
     </div>
 
@@ -388,7 +461,7 @@
             },
             bio: {
                 zh: `
-                    <p>你好，我是Celistria，在跳转至我的Unifans之前，请务必阅读接下来的注意事项。（点击展开）</p>
+                    <p>您好，这里是几位创作者们联合创作的一个网站，如果您是通过链接来到这里的，可以在下方找到我们每个人的Unifans链接，但如果您是第一次来到这里，在跳转至我们的Unifans之前，请务必阅读接下来的注意事项。（点击展开）</p>
                     <p></p>
                     <div class="accordion">
                         <div class="accordion-header">
@@ -423,7 +496,7 @@
                     </div>
                 `,
                 en: `
-                    <p>Hello, I'm Celistria. Before proceeding to my Unifans, please make sure to read the following notes. (Click to expand)</p>
+                    <p>Hello, this is a website jointly created by several creators. If you came here through a link, you can find each of our Unifans links below. However, if you are visiting here for the first time, please be sure to read the following notes before proceeding to our Unifans. (Click to expand)</p>
                     <p></p>
                     <div class="accordion">
                         <div class="accordion-header">
@@ -458,7 +531,7 @@
                     </div>
                 `,
                 "zh-tw": `
-                    <p>你好，我是Celistria，在跳轉至我的Unifans之前，請務必閱讀接下來的注意事項。（點擊展開）</p>
+                    <p>您好，這裡是幾位創作者們聯合創作的一個網站，如果您是通過鏈接來到這裡的，可以在下方找到我們每個人的Unifans鏈接，但如果您是第一次來到這裡，在跳轉至我們的Unifans之前，請務必閱讀接下來的注意事項。（點擊展開）</p>
                     <p></p>
                     <div class="accordion">
                         <div class="accordion-header">
@@ -493,7 +566,7 @@
                     </div>
                 `,
                 ja: `
-                    <p>こんにちは、Celistriaです。Unifansにアクセスする前に、必ず以下の注意事項をお読みください。（展開するにはクリックしてください）</p>
+                    <p>こんにちは、これは複数のクリエイターによって共同で作成されたウェブサイトです。もしあなたがリンクを通じてここに来られたのであれば、下の方で私たち各人のUnifansリンクを見つけることができます。しかし、初めてここを訪れる方は、私たちのUnifansにアクセスする前に、必ず以下の注意事項をお読みください。（展開するにはクリックしてください）</p>
                     <p></p>
                     <div class="accordion">
                         <div class="accordion-header">
@@ -623,14 +696,18 @@
             profileContainer.classList.add('show');
             
             // 设置个人信息
-            document.getElementById('profileName').textContent = profileConfig.name[language];
+            // 移除对profileName的引用，因为我们已经删除了这个元素
+            // document.getElementById('profileName').textContent = profileConfig.name[language];
             document.getElementById('profileContent').innerHTML = profileConfig.bio[language];
             
             // 自动检测并转换文本中的URL为链接
             convertUrlsToLinks();
             
-            // 设置头像图片
-            document.getElementById('profileAvatarImg').src = profileConfig.avatar;
+            // 设置头像图片（用于profile-card）
+            const profileCardAvatar = document.querySelector('.profile-card-avatar');
+            if (profileCardAvatar) {
+                profileCardAvatar.src = profileConfig.avatar;
+            }
             
             // 更新返回按钮文本
             updateBackButtonText(language);

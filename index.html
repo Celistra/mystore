@@ -38,10 +38,11 @@
 
         .language-selector {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .language-option {
@@ -71,6 +72,22 @@
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+        }
+        
+        .profile-container.show {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .profile-header {
@@ -163,6 +180,27 @@
             border-bottom-color: #a78bfa;
         }
 
+        .back-button {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #f9a8d4, #ffffff);
+            color: #4c1d95;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 168, 212, 0.3);
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(249, 168, 212, 0.5);
+        }
+
         @media (max-width: 768px) {
             .language-selector {
                 flex-direction: column;
@@ -189,11 +227,14 @@
     <div id="particles-js"></div>
 
     <div class="language-selector" id="languageSelector">
-        <div class="language-option" data-language="zh">中文</div>
+        <div class="language-option" data-language="zh">简体中文</div>
+        <div class="language-option" data-language="zh-tw">繁體中文</div>
         <div class="language-option" data-language="en">English</div>
+        <div class="language-option" data-language="ja">日本語</div>
     </div>
 
     <div class="profile-container" id="profileContainer">
+        <button class="back-button" id="backButton" data-lang-zh="返回" data-lang-zh-tw="返回" data-lang-en="Back" data-lang-ja="戻る">返回</button>
         <div class="profile-header">
             <img src="Cel.jpg" alt="Profile Avatar" class="profile-avatar" id="profileAvatarImg">
             <h1 class="profile-name" id="profileName">用户名</h1>
@@ -210,7 +251,9 @@
             avatar: "Cel.jpg", // 使用GitHub根目录的Cel.jpg图片文件
             name: {
                 zh: "Celistria",
-                en: "Celistria"
+                "zh-tw": "Celistria",
+                en: "Celistria",
+                ja: "Celistria"
             },
             bio: {
                 zh: `
@@ -244,9 +287,56 @@
                     <p>Finally, if you find this process troublesome, I apologize in advance here. Thank you for your understanding and support.</p>
                     <p></p>
                     <p>2. Other content is being updated...</p>
+                `,
+                "zh-tw": `
+                    <p>你好，我是Celistria，在跳轉至我的Unifans之前，請務必閱讀接下來的注意事項。</p>
+                    <p></p>
+                    <p>1、贊助文件打開方式（必看！！！）。</p>
+                    <p>贊助並且下載對應文件後，你將得到一個包含".penc"文件的壓縮包，這個文件無法通過常規方式打開，必須需要使用下方這個40MB的特殊'Viewer'圖片瀏覽程序才能查看到該壓縮包中每個".penc"文件所對應的圖片。</p>
+                    <p>'Viewer'圖片瀏覽程序(V0.1版本)下載地址：</p>
+                    <p>-Mega網盤：</p>
+                    <p>-瀏覽器直接下載：</p>
+                    <p>下載完成後，你可以根據當前的系統選擇相應設備的程序（當前僅支持：電腦端-最常見的Win、蘋果Mac；手機端-安卓系統、蘋果IOS系統）。</p>
+                    <p>打開程序後，首先要正確選擇你解壓後的文件夾，隨後你會看到一系列與訂閱內容無關的'表圖片'，隨後你需要在右下角輸入密碼Celistria，再點擊左邊的☆按鈕，隨後，你就可以正常的瀏覽訂閱的圖片了。</p>
+                    <p>在這個圖片瀏覽程序中，我設計了大部分常用的功能，如果有bug可以隨時反饋。</p>
+                    <p>如果你確保了已經完全理解，可以點擊這個鏈接繼續跳轉至我的Unifans：</p>
+                    <p>最後，如果感到了麻煩我在這裡向您提前致歉，感謝您的理解與支持。</p>
+                    <p></p>
+                    <p>2、其它內容正在更新中...</p>
+                `,
+                ja: `
+                    <p>こんにちは、Celistriaです。Unifansにアクセスする前に、必ず以下の注意事項をお読みください。</p>
+                    <p></p>
+                    <p>1. スポンサーファイルの開き方（必読！！！）</p>
+                    <p>スポンサー登録を行い、対応するファイルをダウンロードすると、".penc"ファイルを含む圧縮ファイルが入手できます。このファイルは通常の方法では開くことができず、以下の40MBの特別な'Viewer'画像ビューアプログラムを使用する必要があります。</p>
+                    <p>'Viewer'画像ビューアプログラム（V0.1バージョン）ダウンロードリンク：</p>
+                    <p>- Megaクラウドストレージ：</p>
+                    <p>- ブラウザ直接ダウンロード：</p>
+                    <p>ダウンロード後、現在のシステムに基づいて、 respectiveデバイス用のプログラムを選択できます（現在サポートされているのは：コンピュータ - 最も一般的なWindows、Apple Mac；モバイル - Androidシステム、Apple iOSシステム）。</p>
+                    <p>プログラムを開いたら、まず解凍したフォルダを正しく選択してください。すると、サブスクリプションコンテンツとは関係のない一連の'カバー画像'が表示されます。次に、右下隅にパスワード"Celistria"を入力し、左側の☆ボタンをクリックすると、サブスクライブした画像を通常どおりに閲覧することができます。</p>
+                    <p>この画像ビューアプログラムには、一般的に使用されるほとんどの機能を設計しました。バグがある場合は、いつでもフィードバックしてください。</p>
+                    <p>完全に理解できたことを確認したら、このリンクをクリックしてUnifansにアクセスしてください：</p>
+                    <p>最後に、このプロセスが面倒だと感じた場合は、ここであらかじめお詫び申し上げます。ご理解とご支援に感謝します。</p>
+                    <p></p>
+                    <p>2. その他のコンテンツは更新中です...</p>
                 `
             }
         };
+
+        // 返回按钮功能
+        document.getElementById('backButton').addEventListener('click', function() {
+            const profileContainer = document.getElementById('profileContainer');
+            profileContainer.classList.remove('show');
+            profileContainer.style.display = 'none';
+            document.getElementById('languageSelector').style.display = 'flex';
+        });
+
+        // 更新返回按钮文本
+        function updateBackButtonText(language) {
+            const backButton = document.getElementById('backButton');
+            const text = backButton.getAttribute(`data-lang-${language}`) || '返回';
+            backButton.textContent = text;
+        }
 
         // 初始化粒子效果
         particlesJS('particles-js', {
@@ -310,6 +400,9 @@
             
             const profileContainer = document.getElementById('profileContainer');
             profileContainer.style.display = 'flex';
+            // 强制重排后添加动画类
+            void profileContainer.offsetWidth;
+            profileContainer.classList.add('show');
             
             // 设置个人信息
             document.getElementById('profileName').textContent = profileConfig.name[language];
@@ -320,6 +413,9 @@
             
             // 设置头像图片
             document.getElementById('profileAvatarImg').src = profileConfig.avatar;
+            
+            // 更新返回按钮文本
+            updateBackButtonText(language);
         }
 
         // 将文本中的URL转换为可点击链接

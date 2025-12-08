@@ -243,7 +243,7 @@
     <script>
         // 个人信息配置
         const profileConfig = {
-            avatar: "https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7376ec377ab74ee4aa1b08233b441e33~tplv-a9rns2rl98-image.image?rcl=202512050017553CB30B48A72498C758F6&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1767457084&x-signature=0WaTgCV9ne%2FdFmoHV6%2FtqyIAg3U%3D", // 替换为你的头像URL
+            avatar: "Cel", // GitHub上的头像图片名称
             name: {
                 zh: "Celistria",
                 en: "Celistria"
@@ -354,34 +354,32 @@
             // 自动检测并转换文本中的URL为链接
             convertUrlsToLinks();
             
-            // 初始化头像上传功能
-            initAvatarUpload();
+            // 初始化头像显示和上传功能
+            initAvatarDisplay();
         }
         
-        // 初始化头像上传功能
-        function initAvatarUpload() {
+        // 初始化头像显示和上传功能
+        function initAvatarDisplay() {
             const avatarUpload = document.getElementById('avatarUpload');
             const profileAvatar = document.getElementById('profileAvatar');
             
-            avatarUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(event) {
-                        // 创建一个新的img元素
-                        const img = document.createElement('img');
-                        img.src = event.target.result;
-                        img.className = 'profile-avatar';
-                        img.id = 'profileAvatarImg';
-                        
-                        // 替换占位符
-                        profileAvatar.innerHTML = '';
-                        profileAvatar.appendChild(img);
-                        
-                        // 更新配置中的头像URL
-                        profileConfig.avatar = event.target.result;
-                    };
+            // 尝试加载GitHub上的头像图片
+            const githubAvatar = new Image();
+            githubAvatar.onload = function() {
+                // 图片加载成功，显示头像
+                profileAvatar.innerHTML = '';
+                githubAvatar.className = 'profile-avatar';
+                githubAvatar.id = 'profileAvatarImg';
+                profileAvatar.appendChild(githubAvatar);
+            };
+            
+            githubAvatar.onerror = function() {
+                // 图片加载失败，保持占位符不变
+                console.log('无法加载，显示占位符');
+            };
+            
+            // 设置图片源为GitHub仓库中的图片，图片位于仓库根目录
+            githubAvatar.src = profileConfig.avatar;
                     
                     reader.readAsDataURL(file);
                 }

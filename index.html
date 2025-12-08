@@ -180,6 +180,63 @@
             border-bottom-color: #a78bfa;
         }
 
+        .accordion {
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-header {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(90deg, #ffffff, #c084fc);
+            color: #000000;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #a855f7, #f3e8ff);
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: transparent;
+            color: white;
+        }
+        
+        .accordion-inner {
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.7), rgba(67, 56, 202, 0.7));
+            backdrop-filter: blur(10px);
+        }
+
+        .accordion.active .accordion-content {
+            max-height: 1000px;
+        }
+
+
+
         .back-button {
             position: absolute;
             top: 2rem;
@@ -257,68 +314,144 @@
             },
             bio: {
                 zh: `
-                    <p>你好，我是Celistria，在跳转至我的Unifans之前，请务必阅读接下来的注意事项。</p>
+                    <p>你好，我是Celistria，在跳转至我的Unifans之前，请务必阅读接下来的注意事项。（点击展开）</p>
                     <p></p>
-                    <p>1、赞助文件打开方式（必看！！！）。</p>
-                    <p>赞助并且下载对应文件后，你将得到一个包含".penc"文件的压缩包，这个文件无法通过常规方式打开，必须需要使用下方这个40MB的特殊'Viewer'图片浏览程序才能查看到该压缩包中每个".penc"文件所对应的图片。</p>
-                    <p>'Viewer'图片浏览程序(V0.1版本)下载地址：</p>
-                    <p>-Mega网盘：</p>
-                    <p>-浏览器直接下载：</p>
-                    <p>下载完成后，你可以根据当前的系统选择相应设备的程序（当前仅支持：电脑端-最常见的Win、苹果Mac；手机端-安卓系统、苹果IOS系统）。</p>
-                    <p>打开程序后，首先要正确选择你解压后的文件夹，随后你会看到一系列与订阅内容无关的'表图片'，随后你需要在右下角输入密码Celistria，再点击左边的☆按钮，随后，你就可以正常的浏览订阅的图片了。</p>
-                    <p>在这个图片浏览程序中，我设计了大部分常用的功能，如果有bug可以随时反馈。</p>
-                    <p>如果您确保了已经完全理解，可以点击这个链接继续跳转至我的Unifans：</p>
-                    <p>最后，如果感到了麻烦我在这里向您提前致歉，感谢您的理解与支持。</p>
-                    <p></p>
-                    <p>2、其它内容正在更新中...</p>
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            1、赞助文件打开方式（必看！！！）
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>赞助并且下载对应文件后，你将得到一个包含".penc"文件的压缩包，这个文件无法通过常规方式打开，必须需要使用下方这个40MB的特殊'Viewer'图片浏览程序才能查看到该压缩包中每个".penc"文件所对应的图片。</p>
+                                <p>'Viewer'图片浏览程序(V0.1版本)下载地址：</p>
+                                <p>-Mega网盘：</p>
+                                <p>-浏览器直接下载：</p>
+                                <p>下载完成后，你可以根据当前的系统选择相应设备的程序（当前仅支持：电脑端-最常见的Win、苹果Mac；手机端-安卓系统、苹果IOS系统）。</p>
+                                <p>打开程序后，首先要正确选择你解压后的文件夹，随后你会看到一系列与订阅内容无关的'表图片'，随后你需要在右下角输入密码Celistria，再点击左边的☆按钮，随后，你就可以正常的浏览订阅的图片了。</p>
+                                <p>在这个图片浏览程序中，我设计了大部分常用的功能，如果有bug可以随时反馈。</p>
+                                <p>如果您确保了已经完全理解，可以点击这个链接继续跳转至我的Unifans：</p>
+                                <p>最后，如果感到了麻烦我在这里向您提前致歉，感谢您的理解与支持。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            2、其它内容正在更新中...
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>更多精彩内容即将推出，敬请期待！</p>
+                            </div>
+                        </div>
+                    </div>
                 `,
                 en: `
-                    <p>Hello, I'm Celistria. Before proceeding to my Unifans, please make sure to read the following notes.</p>
-                    </p>
-                    <p>1. How to Open Sponsor Files (Must Read!!!).</p>
-                    <p>After sponsoring and downloading the corresponding files, you will receive a compressed package containing ".penc" files. These files cannot be opened through conventional methods. You must use the special 40MB 'Viewer' image viewer program provided below to view the images corresponding to each ".penc" file in the compressed package.</p>
-                    <p>'Viewer' Image Viewer Program (Version V0.1) Download Links:</p>
-                    <p>- Mega Cloud Storage:</p>
-                    <p>- Direct Browser Download:</p>
-                    <p>After downloading, you can choose the program for your respective device based on your current system (currently supports: Computer - most common Windows, Apple Mac; Mobile - Android system, Apple iOS system).</p>
-                    <p>After opening the program, first correctly select the folder you have extracted. You will then see a series of 'cover images' unrelated to the subscription content. Next, enter the password "Celistria" in the bottom right corner, click the ☆ button on the left, and then you can normally browse the subscribed images.</p>
-                    <p>In this image viewer program, I have designed most of the commonly used functions. If you encounter any bugs, please feel free to provide feedback.</p>
-                    <p>If you have ensured that you fully understand, you can click this link to proceed to my Unifans:</p>
-                    <p>Finally, if you find this process troublesome, I apologize in advance here. Thank you for your understanding and support.</p>
+                    <p>Hello, I'm Celistria. Before proceeding to my Unifans, please make sure to read the following notes. (Click to expand)</p>
                     <p></p>
-                    <p>2. Other content is being updated...</p>
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            1. How to Open Sponsor Files (Must Read!!!)
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>After sponsoring and downloading the corresponding files, you will receive a compressed package containing ".penc" files. These files cannot be opened through conventional methods. You must use the special 40MB 'Viewer' image viewer program provided below to view the images corresponding to each ".penc" file in the compressed package.</p>
+                                <p>'Viewer' Image Viewer Program (Version V0.1) Download Links:</p>
+                                <p>- Mega Cloud Storage:</p>
+                                <p>- Direct Browser Download:</p>
+                                <p>After downloading, you can choose the program for your respective device based on your current system (currently supports: Computer - most common Windows, Apple Mac; Mobile - Android system, Apple iOS system).</p>
+                                <p>After opening the program, first correctly select the folder you have extracted. You will then see a series of 'cover images' unrelated to the subscription content. Next, enter the password "Celistria" in the bottom right corner, click the ☆ button on the left, and then you can normally browse the subscribed images.</p>
+                                <p>In this image viewer program, I have designed most of the commonly used functions. If you encounter any bugs, please feel free to provide feedback.</p>
+                                <p>If you have ensured that you fully understand, you can click this link to proceed to my Unifans:</p>
+                                <p>Finally, if you find this process troublesome, I apologize in advance here. Thank you for your understanding and support.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            2. Other content is being updated...
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>More exciting content is coming soon, stay tuned!</p>
+                            </div>
+                        </div>
+                    </div>
                 `,
                 "zh-tw": `
-                    <p>你好，我是Celistria，在跳轉至我的Unifans之前，請務必閱讀接下來的注意事項。</p>
+                    <p>你好，我是Celistria，在跳轉至我的Unifans之前，請務必閱讀接下來的注意事項。（點擊展開）</p>
                     <p></p>
-                    <p>1、贊助文件打開方式（必看！！！）。</p>
-                    <p>贊助並且下載對應文件後，你將得到一個包含".penc"文件的壓縮包，這個文件無法通過常規方式打開，必須需要使用下方這個40MB的特殊'Viewer'圖片瀏覽程序才能查看到該壓縮包中每個".penc"文件所對應的圖片。</p>
-                    <p>'Viewer'圖片瀏覽程序(V0.1版本)下載地址：</p>
-                    <p>-Mega網盤：</p>
-                    <p>-瀏覽器直接下載：</p>
-                    <p>下載完成後，你可以根據當前的系統選擇相應設備的程序（當前僅支持：電腦端-最常見的Win、蘋果Mac；手機端-安卓系統、蘋果IOS系統）。</p>
-                    <p>打開程序後，首先要正確選擇你解壓後的文件夾，隨後你會看到一系列與訂閱內容無關的'表圖片'，隨後你需要在右下角輸入密碼Celistria，再點擊左邊的☆按鈕，隨後，你就可以正常的瀏覽訂閱的圖片了。</p>
-                    <p>在這個圖片瀏覽程序中，我設計了大部分常用的功能，如果有bug可以隨時反饋。</p>
-                    <p>如果你確保了已經完全理解，可以點擊這個鏈接繼續跳轉至我的Unifans：</p>
-                    <p>最後，如果感到了麻煩我在這裡向您提前致歉，感謝您的理解與支持。</p>
-                    <p></p>
-                    <p>2、其它內容正在更新中...</p>
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            1、贊助文件打開方式（必看！！！）
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>贊助並且下載對應文件後，你將得到一個包含".penc"文件的壓縮包，這個文件無法通過常規方式打開，必須需要使用下方這個40MB的特殊'Viewer'圖片瀏覽程序才能查看到該壓縮包中每個".penc"文件所對應的圖片。</p>
+                                <p>'Viewer'圖片瀏覽程序(V0.1版本)下載地址：</p>
+                                <p>-Mega網盤：</p>
+                                <p>-瀏覽器直接下載：</p>
+                                <p>下載完成後，你可以根據當前的系統選擇相應設備的程序（當前僅支持：電腦端-最常見的Win、蘋果Mac；手機端-安卓系統、蘋果IOS系統）。</p>
+                                <p>打開程序後，首先要正確選擇你解壓後的文件夾，隨後你會看到一系列與訂閱內容無關的'表圖片'，隨後你需要在右下角輸入密碼Celistria，再點擊左邊的☆按鈕，隨後，你就可以正常的瀏覽訂閱的圖片了。</p>
+                                <p>在這個圖片瀏覽程序中，我設計了大部分常用的功能，如果有bug可以隨時反饋。</p>
+                                <p>如果你確保了已經完全理解，可以點擊這個鏈接繼續跳轉至我的Unifans：</p>
+                                <p>最後，如果感到了麻煩我在這裡向您提前致歉，感謝您的理解與支持。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            2、其它內容正在更新中...
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>更多精彩內容即將推出，敬請期待！</p>
+                            </div>
+                        </div>
+                    </div>
                 `,
                 ja: `
-                    <p>こんにちは、Celistriaです。Unifansにアクセスする前に、必ず以下の注意事項をお読みください。</p>
+                    <p>こんにちは、Celistriaです。Unifansにアクセスする前に、必ず以下の注意事項をお読みください。（展開するにはクリックしてください）</p>
                     <p></p>
-                    <p>1. スポンサーファイルの開き方（必読！！！）</p>
-                    <p>スポンサー登録を行い、対応するファイルをダウンロードすると、".penc"ファイルを含む圧縮ファイルが入手できます。このファイルは通常の方法では開くことができず、以下の40MBの特別な'Viewer'画像ビューアプログラムを使用する必要があります。</p>
-                    <p>'Viewer'画像ビューアプログラム（V0.1バージョン）ダウンロードリンク：</p>
-                    <p>- Megaクラウドストレージ：</p>
-                    <p>- ブラウザ直接ダウンロード：</p>
-                    <p>ダウンロード後、現在のシステムに基づいて、 respectiveデバイス用のプログラムを選択できます（現在サポートされているのは：コンピュータ - 最も一般的なWindows、Apple Mac；モバイル - Androidシステム、Apple iOSシステム）。</p>
-                    <p>プログラムを開いたら、まず解凍したフォルダを正しく選択してください。すると、サブスクリプションコンテンツとは関係のない一連の'カバー画像'が表示されます。次に、右下隅にパスワード"Celistria"を入力し、左側の☆ボタンをクリックすると、サブスクライブした画像を通常どおりに閲覧することができます。</p>
-                    <p>この画像ビューアプログラムには、一般的に使用されるほとんどの機能を設計しました。バグがある場合は、いつでもフィードバックしてください。</p>
-                    <p>完全に理解できたことを確認したら、このリンクをクリックしてUnifansにアクセスしてください：</p>
-                    <p>最後に、このプロセスが面倒だと感じた場合は、ここであらかじめお詫び申し上げます。ご理解とご支援に感謝します。</p>
-                    <p></p>
-                    <p>2. その他のコンテンツは更新中です...</p>
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            1. スポンサーファイルの開き方（必読！！！）
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>スポンサー登録を行い、対応するファイルをダウンロードすると、".penc"ファイルを含む圧縮ファイルが入手できます。このファイルは通常の方法では開くことができず、以下の40MBの特別な'Viewer'画像ビューアプログラムを使用する必要があります。</p>
+                                <p>'Viewer'画像ビューアプログラム（V0.1バージョン）ダウンロードリンク：</p>
+                                <p>- Megaクラウドストレージ：</p>
+                                <p>- ブラウザ直接ダウンロード：</p>
+                                <p>ダウンロード後、現在のシステムに基づいて、 respectiveデバイス用のプログラムを選択できます（現在サポートされているのは：コンピュータ - 最も一般的なWindows、Apple Mac；モバイル - Androidシステム、Apple iOSシステム）。</p>
+                                <p>プログラムを開いたら、まず解凍したフォルダを正しく選択してください。すると、サブスクリプションコンテンツとは関係のない一連の'カバー画像'が表示されます。次に、右下隅にパスワード"Celistria"を入力し、左側の☆ボタンをクリックすると、サブスクライブした画像を通常どおりに閲覧することができます。</p>
+                                <p>この画像ビューアプログラムには、一般的に使用されるほとんどの機能を設計しました。バグがある場合は、いつでもフィードバックしてください。</p>
+                                <p>完全に理解できたことを確認したら、このリンクをクリックしてUnifansにアクセスしてください：</p>
+                                <p>最後に、このプロセスが面倒だと感じた場合は、ここであらかじめお詫び申し上げます。ご理解とご支援に感謝します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header">
+                            2. その他のコンテンツは更新中です...
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>もっと素晴らしいコンテンツが近日公開されますので、お楽しみに！</p>
+                            </div>
+                        </div>
+                    </div>
                 `
             }
         };
@@ -336,6 +469,17 @@
             const backButton = document.getElementById('backButton');
             const text = backButton.getAttribute(`data-lang-${language}`) || '返回';
             backButton.textContent = text;
+        }
+
+        // 初始化手风琴功能
+        function initAccordions() {
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                const header = accordion.querySelector('.accordion-header');
+                header.addEventListener('click', () => {
+                    accordion.classList.toggle('active');
+                });
+            });
         }
 
         // 初始化粒子效果
@@ -416,6 +560,9 @@
             
             // 更新返回按钮文本
             updateBackButtonText(language);
+            
+            // 初始化手风琴功能
+            initAccordions();
         }
 
         // 将文本中的URL转换为可点击链接

@@ -73,6 +73,7 @@
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            width: 90%;
         }
         
         .profile-container.show {
@@ -145,6 +146,7 @@
             transition: all 0.5s ease;
             backdrop-filter: blur(15px);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            max-width: 800px;
         }
 
         .profile-content:hover {
@@ -280,23 +282,29 @@
             
             /* 优化移动端布局 */
             .profile-container {
-                padding: 1.5rem;
+                padding: 1rem;
                 padding-top: 4rem; /* 为返回按钮留出空间 */
+                width: 95%;
+                max-width: none;
             }
             
             .profile-header {
                 margin-top: 2rem; /* 确保头像区域不被返回按钮遮挡 */
                 padding: 1.5rem;
+                width: 100%;
+                max-width: none;
             }
             
             .profile-content {
-                padding: 1.5rem;
+                padding: 1rem;
+                width: 100%;
+                max-width: none;
             }
             
             .profile-content p {
-                margin-bottom: 1.25rem;
-                line-height: 1.7;
-                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.8;
+                font-size: 1.05rem;
             }
             
             .accordion-header {
@@ -305,7 +313,8 @@
             }
             
             .accordion-inner {
-                padding: 1.25rem;
+                padding: 1.5rem;
+                border-radius: 0 0 1rem 1rem;
             }
             
             .back-button {

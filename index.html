@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multilingual Profile</title>
+    <title>Welcome</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
@@ -454,14 +454,14 @@
             <img src="kly.jpg" alt="Klyris" class="profile-card-avatar">
             <div class="profile-card-info">
                 <h2 class="profile-card-name">Klyris</h2>
-                <a href="https://app.unifans.io/c/klyris" target="_blank" class="profile-card-link" data-lang-zh="点击跳转至我的Unifans" data-lang-zh-tw="點擊跳轉至我的Unifans" data-lang-en="Click to visit my Unifans" data-lang-ja="私のUnifansを訪問するにはクリック">点击跳转至我的Unifans</a>
+                <a href="https://app.unifans.io/c/klyris" target="_blank" class="profile-card-link" data-lang-zh="点击跳转至Klyris的Unifans" data-lang-zh-tw="點擊跳轉至Klyris的Unifans" data-lang-en="Click to visit Klyris' Unifans" data-lang-ja="KlyrisのUnifansを訪問するにはクリック">点击跳转至Klyris的Unifans</a>
             </div>
         </div>
         <div class="profile-card">
             <img src="van.jpg" alt="Vanity" class="profile-card-avatar">
             <div class="profile-card-info">
                 <h2 class="profile-card-name">Vanity</h2>
-                <a href="https://app.unifans.io/c/vanity" target="_blank" class="profile-card-link" data-lang-zh="点击跳转至我的Unifans" data-lang-zh-tw="點擊跳轉至我的Unifans" data-lang-en="Click to visit my Unifans" data-lang-ja="私のUnifansを訪問するにはクリック">点击跳转至我的Unifans</a>
+                <a href="https://app.unifans.io/c/vanity" target="_blank" class="profile-card-link" data-lang-zh="点击跳转至Vanity的Unifans" data-lang-zh-tw="點擊跳轉至Vanity的Unifans" data-lang-en="Click to visit Vanity's Unifans" data-lang-ja="VanityのUnifansを訪問するにはクリック">点击跳转至Vanity的Unifans</a>
             </div>
         </div>
     </div>
@@ -729,12 +729,12 @@
             // 更新返回按钮文本
             updateBackButtonText(language);
             
-            // 更新profile-card-link文本
-            const profileCardLink = document.querySelector('.profile-card-link');
-            if (profileCardLink) {
-                const linkText = profileCardLink.getAttribute(`data-lang-${language}`) || '点击跳转至我的Unifans';
-                profileCardLink.textContent = linkText;
-            }
+            // 更新所有profile-card-link文本
+            const profileCardLinks = document.querySelectorAll('.profile-card-link');
+            profileCardLinks.forEach(link => {
+                const linkText = link.getAttribute(`data-lang-${language}`) || '点击跳转至我的Unifans';
+                link.textContent = linkText;
+            });
             
             // 初始化手风琴功能
             initAccordions();

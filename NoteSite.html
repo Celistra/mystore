@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #c084fc;
+            --secondary-color: #a855f7;
+            --dark-color: #1e1b4b;
+            --light-color: #f5f3ff;
+            --border-color: #7e22ce;
+            --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #2e1065 50%, #4338ca 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--light-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 2rem;
+        }
+
+        .language-option {
+            padding: 1.5rem 3rem;
+            background-color: rgba(192, 132, 252, 0.15);
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            font-size: 1.5rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .language-option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px -5px rgba(192, 132, 252, 0.3);
+            background-color: rgba(192, 132, 252, 0.25);
+            border-color: rgba(192, 132, 252, 0.5);
+        }
+
+        .profile-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            border-radius: 1.5rem;
+            background-color: rgba(192, 132, 252, 0.1);
+            width: 100%;
+            max-width: 600px;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        .profile-header:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px -5px rgba(192, 132, 252, 0.2);
+            border-color: rgba(192, 132, 252, 0.5);
+        }
+
+        .profile-avatar-placeholder {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px dashed rgba(192, 132, 252, 0.5);
+            transition: all 0.5s ease;
+            background-color: rgba(192, 132, 252, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-avatar-placeholder:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 35px rgba(192, 132, 252, 0.4);
+            border-color: rgba(192, 132, 252, 0.8);
+            border-style: solid;
+        }
+
+        .profile-avatar-placeholder input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid rgba(192, 132, 252, 0.5);
+            transition: all 0.5s ease;
+            box-shadow: 0 0 25px rgba(192, 132, 252, 0.4);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 35px rgba(192, 132, 252, 0.6);
+            border-color: rgba(192, 132, 252, 0.8);
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .profile-content {
+            width: 100%;
+            padding: 2rem;
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            border-radius: 1.5rem;
+            background-color: rgba(192, 132, 252, 0.08);
+            transition: all 0.5s ease;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        .profile-content:hover {
+            box-shadow: 0 15px 35px -5px rgba(192, 132, 252, 0.2);
+            border-color: rgba(192, 132, 252, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .profile-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: white;
+            text-shadow: 0 0 5px rgba(192, 132, 252, 0.7);
+            transition: all 0.3s ease;
+            padding: 0.25rem 0;
+        }
+        
+        .profile-content p:hover {
+            transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.9),
+                         0 0 15px rgba(192, 132, 252, 0.7);
+        }
+
+        .profile-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .profile-content a:hover {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .language-option {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+            }
+
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="language-selector" id="languageSelector">
+        <div class="language-option" data-language="zh">中文</div>
+        <div class="language-option" data-language="en">English</div>
+    </div>
+
+    <div class="profile-container" id="profileContainer">
+        <div class="profile-header">
+            <div class="profile-avatar-placeholder" id="profileAvatar">
+                <input type="file" id="avatarUpload" accept="image/*">
+                <div class="text-center flex items-center justify-center h-full">
+                    <span class="text-sm text-gray-400">点击此处<br>上传头像</span>
+                </div>
+            </div>
+            <h1 class="profile-name" id="profileName">用户名</h1>
+        </div>
+        <div class="profile-content" id="profileContent">
+            <p>这里是个人简介内容。你可以在JavaScript代码中修改这些文字。</p>
+            <p>你也可以添加网址，例如：<a href="https://www.example.com" target="_blank">https://www.example.com</a>，它会自动变成可点击的链接。</p>
+        </div>
+    </div>
+
+    <script>
+        // 个人信息配置
+        const profileConfig = {
+            avatar: "https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7376ec377ab74ee4aa1b08233b441e33~tplv-a9rns2rl98-image.image?rcl=202512050017553CB30B48A72498C758F6&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1767457084&x-signature=0WaTgCV9ne%2FdFmoHV6%2FtqyIAg3U%3D", // 替换为你的头像URL
+            name: {
+                zh: "Celistria",
+                en: "Celistria"
+            },
+            bio: {
+                zh: `
+                    <p>你好，我是Celistria，在跳转至我的Unifans之前，请务必阅读接下来的注意事项。</p>
+                    <p></p>
+                    <p>1、赞助文件打开方式（必看！！！）。</p>
+                    <p>赞助并且下载对应文件后，你将得到一个包含“.penc”文件的压缩包，这个文件无法通过常规方式打开，必须需要使用下方这个40MB的特殊'Viewer'图片浏览程序才能查看到该压缩包中每个“.penc”文件所对应的图片。</p>
+                    <p>'Viewer'图片浏览程序(V0.1版本)下载地址：</p>
+                    <p>-Mega网盘：</p>
+                    <p>-浏览器直接下载：</p>
+                    <p>下载完成后，你可以根据当前的系统选择相应设备的程序（当前仅支持：电脑端-最常见的Win、苹果Mac；手机端-安卓系统、苹果IOS系统）。</p>
+                    <p>打开程序后，首先要正确选择你解压后的文件夹，随后你会看到一系列与订阅内容无关的'表图片'，随后你需要在右下角输入密码Celistria，再点击左边的☆按钮，随后，你就可以正常的浏览订阅的图片了。</p>
+                    <p>在这个图片浏览程序中，我设计了大部分常用的功能，如果有bug可以随时反馈。</p>
+                    <p>如果您确保了已经完全理解，可以点击这个链接继续跳转至我的Unifans：</p>
+                    <p>最后，如果感到了麻烦我在这里向您提前致歉，感谢您的理解与支持。</p>
+                    <p></p>
+                    <p>2、其它内容正在更新中...</p>
+                `,
+                en: `
+                    <p>Hello, I'm Celistria. Before proceeding to my Unifans, please make sure to read the following notes.</p>
+                    </p>
+                    <p>1. How to Open Sponsor Files (Must Read!!!).</p>
+                    <p>After sponsoring and downloading the corresponding files, you will receive a compressed package containing ".penc" files. These files cannot be opened through conventional methods. You must use the special 40MB 'Viewer' image viewer program provided below to view the images corresponding to each ".penc" file in the compressed package.</p>
+                    <p>'Viewer' Image Viewer Program (Version V0.1) Download Links:</p>
+                    <p>- Mega Cloud Storage:</p>
+                    <p>- Direct Browser Download:</p>
+                    <p>After downloading, you can choose the program for your respective device based on your current system (currently supports: Computer - most common Windows, Apple Mac; Mobile - Android system, Apple iOS system).</p>
+                    <p>After opening the program, first correctly select the folder you have extracted. You will then see a series of 'cover images' unrelated to the subscription content. Next, enter the password "Celistria" in the bottom right corner, click the ☆ button on the left, and then you can normally browse the subscribed images.</p>
+                    <p>In this image viewer program, I have designed most of the commonly used functions. If you encounter any bugs, please feel free to provide feedback.</p>
+                    <p>If you have ensured that you fully understand, you can click this link to proceed to my Unifans:</p>
+                    <p>Finally, if you find this process troublesome, I apologize in advance here. Thank you for your understanding and support.</p>
+                    <p></p>
+                    <p>2. Other content is being updated...</p>
+                `
+            }
+        };
+
+        // 初始化粒子效果
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 1200 } },
+                color: { value: "#c084fc" },
+                shape: {
+                    type: "circle",
+                    stroke: { width: 0, color: "#000000" },
+                    polygon: { nb_sides: 5 }
+                },
+                opacity: {
+                    value: 0.4,
+                    random: true,
+                    anim: { enable: true, speed: 2, opacity_min: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: { enable: true, speed: 3, size_min: 0.2, sync: false }
+                },
+                line_linked: {
+                    enable: false
+                },
+                move: {
+                    enable: true,
+                    speed: 0.8,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "push" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    push: { particles_nb: 5 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // 语言选择功能
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const language = option.getAttribute('data-language');
+                showProfile(language);
+            });
+        });
+
+        // 显示个人资料页面
+        function showProfile(language) {
+            document.getElementById('languageSelector').style.display = 'none';
+            
+            const profileContainer = document.getElementById('profileContainer');
+            profileContainer.style.display = 'flex';
+            
+            // 设置个人信息
+            document.getElementById('profileName').textContent = profileConfig.name[language];
+            document.getElementById('profileContent').innerHTML = profileConfig.bio[language];
+            
+            // 自动检测并转换文本中的URL为链接
+            convertUrlsToLinks();
+            
+            // 初始化头像上传功能
+            initAvatarUpload();
+        }
+        
+        // 初始化头像上传功能
+        function initAvatarUpload() {
+            const avatarUpload = document.getElementById('avatarUpload');
+            const profileAvatar = document.getElementById('profileAvatar');
+            
+            avatarUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        // 创建一个新的img元素
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        img.className = 'profile-avatar';
+                        img.id = 'profileAvatarImg';
+                        
+                        // 替换占位符
+                        profileAvatar.innerHTML = '';
+                        profileAvatar.appendChild(img);
+                        
+                        // 更新配置中的头像URL
+                        profileConfig.avatar = event.target.result;
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // 将文本中的URL转换为可点击链接
+        function convertUrlsToLinks() {
+            const content = document.getElementById('profileContent');
+            const text = content.innerHTML;
+            
+            // 简单的URL检测正则表达式
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            
+            // 不需要再次转换，因为我们已经在bio中设置了链接
+            // 这段代码保留以备将来使用，如果你想动态添加文本而不是在配置中设置
+        }
+    </script>
+</body>
+</html>
